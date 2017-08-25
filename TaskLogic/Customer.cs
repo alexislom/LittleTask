@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TaskLogic
 {
-    public class Customer : IEquatable<Customer>
+    public class Customer : IEquatable<Customer>, IComparer<Customer>, IComparable<Customer>
     {
         #region Fields & properties
 
@@ -48,6 +49,16 @@ namespace TaskLogic
         public static bool operator ==(Customer x, Customer y) => x.Equals(y);
 
         public static bool operator !=(Customer x, Customer y) => !(x == y);
+
+        public int Compare(Customer x, Customer y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int CompareTo(Customer other)
+        {
+            throw new NotImplementedException();
+        }
 
         public bool Compare(Customer other, Func<Customer, Customer, bool> comparer)
         {

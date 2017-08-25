@@ -16,7 +16,12 @@ namespace TaskConsole
             var c3 = new Customer("NeAlex", "NeLomako");
             var c4 = new Customer("VoobsheNeAlex", "VoobsheNeLomako");
 
-            Console.WriteLine(c1.Compare(c2, (x, y) => x.Id > y.Id)); 
+            //Console.WriteLine(c1.Compare(c2, (x, y) => x.Id > y.Id));
+
+            //var x1 = new Customer();
+            //var y1 = new Customer();
+            
+            Console.WriteLine(c1 == c2);
 
 
         }
