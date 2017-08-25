@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TaskLogic
 {
@@ -10,9 +6,23 @@ namespace TaskLogic
     {
         #region Fields & properties
 
-        private int Id;
-        private string Name;
-        public string LastName;
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        public string LastName { get; private set; }
+
+        #endregion
+
+        #region Constructors
+        public Customer() : this("Default Name", "Default Last Name") { }
+
+        public Customer(string name, string lastName)
+        {
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName))
+                throw new ArgumentNullException();
+            Name = name;
+            LastName = lastName;
+            Id = GetHashCode();
+        }
 
         #endregion
 
@@ -29,13 +39,30 @@ namespace TaskLogic
 
         #endregion
 
+        #region Compare operations
+
+        public static bool operator >(Customer x, Customer y) => x.Name.CompareTo(y.Name) >= 0;
+
+        public static bool operator <(Customer x, Customer y) => !(x > y);
+
+        public static bool operator ==(Customer x, Customer y) => x.Equals(y);
+
+        public static bool operator !=(Customer x, Customer y) => !(x == y);
+
+        public bool Compare(Customer other, Func<Customer, Customer, bool> comparer)
+        {
+            return comparer(this, other);
+        }
+
+        #endregion
+
         #region Overrides from object
 
         public override string ToString()
         {
             return $"Id of Customer: {Id}" + Environment.NewLine 
-                   + $"Name: {Name}" + Environment.NewLine
-                   + $"LastName: {LastName}";
+                 + $"Name: {Name}" + Environment.NewLine
+                 + $"LastName: {LastName}";
         }
 
         public override int GetHashCode()
@@ -53,6 +80,5 @@ namespace TaskLogic
         }
 
         #endregion
-
     }
 }
